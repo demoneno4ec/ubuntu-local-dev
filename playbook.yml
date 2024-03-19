@@ -1,0 +1,14 @@
+- name: Preparing a local dev machine
+  hosts: localhost
+    #  remote_user: root
+  tasks:
+   - name: Copy file example_file to /tmp with permissions
+     ansible.builtin.copy:
+       src: ./.env
+       dest: ~/.env
+
+# 1. Обновление системы, установка минимально необходимых зависимостей
+# 2. Итеративно
+#   1. Установка софта
+#   2. Конфигурирование софта
+# 3. Пост конфигурирование (надо понять, как работает с ребутами и т.д.)
