@@ -9,7 +9,14 @@ TODO
 	- gnome-tweaks
 	- vim
 - скрипт выполняет конфигурацию системы
-	- порядок фаворитов
-	- gnome tweaks настройка клавиш
-	- настройку виртуальной машины (гостевой режим)
-	- локализация (???)
+	- порядок фаворитов (Делать вручную)
+	- gnome tweaks настройка клавиш (посмотреть как можно сделать)
+	- настройку виртуальной машины (гостевой режим) ??
+	- локализация (делать вручную)
+
+# Инструкция
+```sh
+mkdir -p ~/projects/demoneno4ec
+sudo git clone https://github.com/demoneno4ec/ubuntu-local-dev.git ~/projects/demoneno4ec/ubuntu-local-dev
+sudo ~/projects/demoneno4ec/ubuntu-local-dev/init.sh
+```
