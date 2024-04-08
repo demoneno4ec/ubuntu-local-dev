@@ -1,4 +1,4 @@
-module ubuntu-local-dev
+module demoneno4ec/ubuntu-local-dev
 
 go 1.22.2
 

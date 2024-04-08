@@ -5,7 +5,7 @@ import (
     "os/exec"
 
     "github.com/fatih/color"
-    "ubuntu-local-dev/config"
+    "demoneno4ec/ubuntu-local-dev/config"
 )
 
 
