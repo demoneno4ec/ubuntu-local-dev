@@ -16,16 +16,16 @@ type Config struct {
 }
 
 type Packages struct {
-    Apt []string `yaml: "apt"`
-    Snap []string `yaml: "snap"`
-    Ppa []string `yaml: "ppa"`
-    Deb []string `yaml: "deb"`
+    Apt []string `yaml:"apt"`
+    Snap []string `yaml:"snap"`
+    Ppa []string `yaml:"ppa"`
+    Deb []string `yaml:"deb"`
 }
 
 type Repositories struct {
-    AddApt []string `yaml: "add-apt"`
-    Dpkg []string `yaml: "dpkg"`
-    Custom []string `yaml: "custom"`
+    AddApt []string `yaml:"add-apt"`
+    Dpkg []string `yaml:"dpkg"`
+    Custom []string `yaml:"custom"`
 }
 
 type Settings struct {
@@ -52,6 +52,7 @@ func GetFromYaml() *Config {
     if err != nil {
         log.Fatalf("Unmarshal: %v", err)
     }
+    color.Green("Конфиги успешно установлены")
 
     return &config
 }

@@ -1,34 +1,47 @@
 package main
 
 import (
-    "fmt"
-    "os/exec"
+    _ "fmt"
 
     "github.com/fatih/color"
     "demoneno4ec/ubuntu-local-dev/config"
+    "demoneno4ec/ubuntu-local-dev/internal"
 )
 
 
 func main() {
 	config := config.GetFromYaml()
-    fmt.Println(config)
+	err := addingRepositories(config.Repositories)
+
+    if err != nil {
+        color.Red(err.Error())
+        return
+    }
 	updateDependencies()
-	addingPpaRepositories()
 	installAptPackages()
 	installSnapPackages()
 	installCustomPackages()
 	configPackages()
-// test line
-	exampleExecCommand()
+    // test line
+	err = internal.ExecCommand("echo -e Hello go!")
+
+    if err != nil {
+        color.Red(err.Error())
+        return
+    }
 }
 
+func addingRepositories(repositories config.Repositories) error {
+    color.Cyan("Добавление репозиториев")
+    for _, repository := range repositories.AddApt {
+        color.Cyan(repository)
+    }
+
+    return nil
+}
 
 func updateDependencies() {
-	color.Cyan("Prints text in cyan.")
-}
-
-func addingPpaRepositories() {
-	color.Cyan("Prints text in cyan.")
+	color.Cyan("Обновление зависимостей")
 }
 
 func installAptPackages() {
@@ -45,25 +58,4 @@ func installCustomPackages() {
 
 func configPackages() {
 	color.Cyan("Prints text in cyan.")
-}
-
-func exampleExecCommand() {
-	app := "echo"
-
-    arg0 := "-e"
-    arg1 := "Hello world"
-    arg2 := "\n\tfrom"
-    arg3 := "golang"
-
-    cmd := exec.Command(app, arg0, arg1, arg2, arg3)
-    stdout, err := cmd.Output()
-
-    if err != nil {
-        fmt.Println(err.Error())
-        return
-    }
-
-    // Print the output
-    fmt.Println(string(stdout))
-
 }
