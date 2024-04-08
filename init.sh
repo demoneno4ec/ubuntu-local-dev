@@ -25,7 +25,13 @@ apt install -y \
 	git \
 	vim \
 	curl \
-	gnome-tweaks
+	gnome-tweaks \
+	software-properties-common
+
+# добавление репозиториев
+add-apt-repository -y ppa:ondrej/php && \
+	apt update
+
 
 # Установка приложений не из apt
 printf "${Green}# Установка приложений (not apt) \n${NC}"
@@ -33,6 +39,17 @@ printf "${Green}# Установка приложений (not apt) \n${NC}"
 printf "${Green}## Установка Google Chrome \n${NC}"
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
 sudo dpkg -i google-chrome-stable_current_amd64.deb
+## Установка старых версий php
+apt install -y \
+	php7.2 \
+	php7.2-{common,cli,fpm} \
+	php7.4 \
+	php7.4-{common,cli,fpm}
+## Установка go
+wget https://go.dev/dl/go1.22.2.linux-amd64.tar.gz && \
+	tar -C /usr/local -xzf go1.22.2.linux-amd64.tar.gz && \
+	export PATH=$PATH:/usr/local/go/bin
+
 
 # Конфигурирование приложений
 printf "${Green}# Конфигурирование приложений \n${NC}"
