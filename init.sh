@@ -30,6 +30,8 @@ apt install -y \
 
 # добавление репозиториев
 add-apt-repository -y ppa:ondrej/php && \
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null && \
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list && \
 	apt update
 
 
@@ -39,6 +41,9 @@ printf "${Green}# Установка приложений (not apt) \n${NC}"
 printf "${Green}## Установка Google Chrome \n${NC}"
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
 sudo dpkg -i google-chrome-stable_current_amd64.deb
+## Установка sublime-text
+sudo apt-get install sublime-text
+
 ## Установка старых версий php
 apt install -y \
 	php7.2 \

@@ -3,11 +3,15 @@ package main
 import (
     "fmt"
     "os/exec"
-	"github.com/fatih/color"
+
+    "github.com/fatih/color"
+    "ubuntu-local-dev/config"
 )
 
+
 func main() {
-	setConfigFromYaml()
+	config := config.GetFromYaml()
+    fmt.Println(config)
 	updateDependencies()
 	addingPpaRepositories()
 	installAptPackages()
@@ -18,34 +22,6 @@ func main() {
 	exampleExecCommand()
 }
 
-func setConfigFromYaml() {
-	color.Cyan("Prints text in cyan.")
-type conf struct {
-    Hits int64 `yaml:"hits"`
-    Time int64 `yaml:"time"`
-}
-
-func (c *conf) getConf() *conf {
-
-    yamlFile, err := os.ReadFile("conf.yaml")
-    if err != nil {
-        log.Printf("yamlFile.Get err   #%v ", err)
-    }
-    err = yaml.Unmarshal(yamlFile, c)
-    if err != nil {
-        log.Fatalf("Unmarshal: %v", err)
-    }
-
-    return c
-}
-
-func main() {
-    var c conf
-    c.getConf()
-
-    	fmt.Println(c)
-	}
-}
 
 func updateDependencies() {
 	color.Cyan("Prints text in cyan.")
