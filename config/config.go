@@ -7,6 +7,7 @@ import (
     "gopkg.in/yaml.v2"
 
     "github.com/fatih/color"
+    "demoneno4ec/ubuntu-local-dev/internal"
 )
 
 type Config struct {
@@ -38,8 +39,9 @@ type Git struct {
     SshDir string `yaml: "ssh_dir"`
 }
 
-func GetFromYaml() *Config {
-    var config Config
+func GetFromYaml() internal.Config {
+    var yamlConfig Config
+    var config internal.Config
 
     color.Cyan("Получаем конфигурацию скрипта из yaml")
 
@@ -48,11 +50,17 @@ func GetFromYaml() *Config {
         log.Printf("yamlFile.Get err   #%v ", err)
     }
 
-    err = yaml.Unmarshal(yamlFile, &config)
+    err = yaml.Unmarshal(yamlFile, &yamlConfig)
     if err != nil {
         log.Fatalf("Unmarshal: %v", err)
     }
+
+    var repositories internal.Repository[]
+    for _, repository := range yamlConfig.Repositories.AddApt {
+        repositories = append(repositories, repository)
+    }
+
     color.Green("Конфиги успешно установлены")
 
-    return &config
+    return config
 }
